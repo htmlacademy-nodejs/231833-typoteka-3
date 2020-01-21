@@ -1,7 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
 * Студент: [Владимир Мазо](https://up.htmlacademy.ru/nodejs/3/user/231833).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Миловидов](https://htmlacademy.ru/profile/id1144203).
 
 ---
 
