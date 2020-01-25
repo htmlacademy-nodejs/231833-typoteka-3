@@ -11,5 +11,5 @@ const Cli = {
 };
 
 module.exports = {
-  Cli,
+  Cli
 };
