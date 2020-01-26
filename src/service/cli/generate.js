@@ -59,11 +59,13 @@ const generateOffers = (count) =>
     .fill({})
     .map(() => ({
       title: TITLES[getRandomInt(0, TITLES.length - 1)],
-      createdDate: [SENTENCES[getRandomInt(0, SENTENCES.length - 1)]],
+      createdDate: new Date(getRandomInt(new Date().setMonth(-2),new Date().setMonth(0))),
       announce: shuffle(SENTENCES)
         .slice(1, 5)
         .join(` `),
-      fullText: ``,
+      fullText: shuffle(SENTENCES)
+      .slice(1, SENTENCES.length - 1)
+      .join(` `),
       category:
         CATEGORIES[Math.floor(Math.random() * Object.keys(CATEGORIES).length)]
     }));
