@@ -59,7 +59,7 @@ const generateOffers = (count) =>
     .fill({})
     .map(() => ({
       title: TITLES[getRandomInt(0, TITLES.length - 1)],
-      createdDate: new Date(getRandomInt(new Date().setMonth(-2),new Date().setMonth(0))),
+      createdDate: new Date(getRandomInt(new Date().setMonth(-2), new Date().setMonth(0))),
       announce: shuffle(SENTENCES)
         .slice(1, 5)
         .join(` `),
