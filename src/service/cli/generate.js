@@ -1,5 +1,7 @@
 "use strict";
 
+const chalk = require(`chalk`);
+
 const {getRandomInt, shuffle} = require(`../utils`);
 const fs = require(`fs`).promises;
 
@@ -79,9 +81,9 @@ module.exports = {
 
     try {
       await fs.writeFile(FILE_NAME, content);
-      console.log(`Operation success. File created.`);
+      console.log(chalk.green(`Operation success. File created.`));
     } catch (err) {
-      console.error(`Can't write data to file...`);
+      console.error(chalk.red(`Can't write data to file...`));
     }
   }
 };
