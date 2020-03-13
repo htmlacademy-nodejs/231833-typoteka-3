@@ -1,14 +1,5 @@
-doctype html
-html(lang='ru')
-  head
-    meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(http-equiv='X-UA-Compatible', content='ie=edge')
-    title registration
-    link(rel='preload', href='./fonts/Inter-Regular.woff2', as='font', crossorigin='anonymous')
-    link(rel='preload', href='./fonts/Inter-Medium.woff2', as='font', crossorigin='anonymous')
-    link(rel='preload', href='./fonts/SFProDisplay-Regular.woff2', as='font', crossorigin='anonymous')
-    link(rel='stylesheet', href='css/style.min.css')
+extends ./shared/layout.pug
+block content
   body
     .wrapper
       header.header
@@ -69,9 +60,3 @@ html(lang='ru')
                     input(type='password', placeholder='Пароль', required='')
                 button.form__submit-btn.form__submit-btn--log-in.button.button--colored(type='submit') Войти
           .modal__overlay
-      footer.footer
-        a.footer__copyright(href='#', aria-label='HTMLAcademy')
-          img(src='img/icons/HTMLAcademyLogo.svg', width='112', height='50', alt='HTMLAcademy')
-        span •
-        p Типотека, 2019
-    script(src='js/main.js')
