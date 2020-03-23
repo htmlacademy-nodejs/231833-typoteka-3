@@ -1,5 +1,6 @@
 "use strict";
 
+const path = require(`path`);
 const express = require(`express`);
 const loginRoutes = require(`../routes/login`);
 const mainRoutes = require(`../routes/main`);
@@ -11,6 +12,8 @@ const searchRoutes = require(`../routes/search`);
 const app = express();
 const DEFAULT_PORT = 8080;
 
+app.set(`views`, path.join(__dirname, `./templates`));
+app.set(`view engine`, `pug`);
 
 app.use(`/login`, loginRoutes);
 app.use(`/my`, myRoutes);
