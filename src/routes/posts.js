@@ -1,21 +1,23 @@
 "use strict";
 
 const fs = require(`fs`).promises;
-const { HttpCode } = require(`../service/constants`);
+const {HttpCode} = require(`../service/constants`);
 const FILENAME = `mocks.json`;
 
-const { Router } = require(`express`);
+const {Router} = require(`express`);
 const postRouter = new Router();
 
 postRouter.get(`/`, async (req, res) => {
   try {
     const fileContent = await fs.readFile(FILENAME);
     const mocks = JSON.parse(fileContent);
-    console.log(mocks)
-    const message = mocks.map((post) => `<li>${post.title}</li>`).join(``);
-    res.status(HttpCode.OK).send(`<ul>${message}</ul>`);
+    res.status(HttpCode.OK).json(mocks);
   } catch (err) {
-    res.status(HttpCode.INTERNAL_SERVER_ERROR).send(`Temporary issue, please contact system administrator.`);
+    if (err.code === `ENOENT`) {
+      res.status(HttpCode.NOT_FOUND).json([]);
+    } else {
+      res.status(HttpCode.INTERNAL_SERVER_ERROR).send(`Something went wrong`);
+    }
   }
 });
 
