@@ -10,6 +10,11 @@ const postRouter = new Router();
 postRouter.get(`/`, async (req, res) => {
   try {
     const fileContent = await fs.readFile(FILENAME);
+    const stat = await fs.stat(FILENAME);
+    if (stat.size === 0) {
+      res.status(HttpCode.OK).json([]);
+      return
+    }
     const mocks = JSON.parse(fileContent);
     res.status(HttpCode.OK).json(mocks);
   } catch (err) {
