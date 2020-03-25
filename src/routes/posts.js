@@ -13,7 +13,7 @@ postRouter.get(`/`, async (req, res) => {
     const stat = await fs.stat(FILENAME);
     if (stat.size === 0) {
       res.status(HttpCode.OK).json([]);
-      return
+      return;
     }
     const mocks = JSON.parse(fileContent);
     res.status(HttpCode.OK).json(mocks);
