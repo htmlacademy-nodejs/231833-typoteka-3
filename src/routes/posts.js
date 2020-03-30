@@ -2,15 +2,15 @@
 
 const fs = require(`fs`).promises;
 const {HttpCode} = require(`../service/constants`);
-const FILENAME = `mocks.json`;
+const mockFile = require(`../service/constants`);
 
 const {Router} = require(`express`);
 const postRouter = new Router();
 
 postRouter.get(`/`, async (req, res) => {
   try {
-    const fileContent = await fs.readFile(FILENAME);
-    const stat = await fs.stat(FILENAME);
+    const fileContent = await fs.readFile(mockFile);
+    const stat = await fs.stat(mockFile);
     if (stat.size === 0) {
       res.status(HttpCode.OK).json([]);
       return;
