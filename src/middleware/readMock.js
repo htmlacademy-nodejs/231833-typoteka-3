@@ -1,22 +1,19 @@
 "use strict";
 
 const fs = require(`fs`).promises;
-const {HttpCode} = require(`../service/constants`);
-const mockFile = require(`../service/constants`);
+const {HttpCode, MOCKS_FILENAME} = require(`../service/constants`);
 
-const {Router} = require(`express`);
-const postRouter = new Router();
-
-postRouter.get(`/`, async (req, res) => {
+module.exports.readMock = async (req, res, next) => {
   try {
-    const fileContent = await fs.readFile(mockFile);
-    const stat = await fs.stat(mockFile);
+    const fileContent = await fs.readFile(MOCKS_FILENAME);
+    const stat = await fs.stat(MOCKS_FILENAME);
     if (stat.size === 0) {
       res.status(HttpCode.OK).json([]);
       return;
     }
     const mocks = JSON.parse(fileContent);
-    res.status(HttpCode.OK).json(mocks);
+    req.mocks = mocks;
+    next();
   } catch (err) {
     if (err.code === `ENOENT`) {
       res.status(HttpCode.NOT_FOUND).json([]);
@@ -24,6 +21,4 @@ postRouter.get(`/`, async (req, res) => {
       res.status(HttpCode.INTERNAL_SERVER_ERROR).send(`Something went wrong`);
     }
   }
-});
-
-module.exports = postRouter;
+};
