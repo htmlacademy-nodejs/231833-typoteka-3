@@ -13,9 +13,7 @@ articlesRoute.get(`/`, readMock, (req, res) => {
 articlesRoute.get(`/:articleId`, readMock, (req, res) => {
   const mocks = req.mocks;
   const articleId = req.params.articleId;
-  const article = mocks.find((item) => {
-    return item.id === articleId;
-  });
+  const article = mocks.find((item) => item.id === articleId);
   res.status(HttpCode.OK).json(article);
 });
 
@@ -39,9 +37,7 @@ articlesRoute.post(`/`, readMock, (req, res) => {
 articlesRoute.put(`/:articleId`, readMock, (req, res) => {
   const mocks = req.mocks;
   const articleId = req.params.articleId;
-  const article = mocks.find((item) => {
-    return item.id === articleId;
-  });
+  const article = mocks.find((item) => item.id === articleId);
 
   const {title, announce, fullText, category, img} = req.body;
 
@@ -64,18 +60,14 @@ articlesRoute.put(`/:articleId`, readMock, (req, res) => {
 articlesRoute.delete(`/:articleId`, readMock, (req, res) => {
   const articleId = req.params.articleId;
   const mocks = req.mocks;
-  const articles = mocks.filter((item) => {
-    return item.id !== articleId;
-  });
+  const articles = mocks.filter((item) => item.id !== articleId);
   res.status(HttpCode.OK).json(articles);
 });
 
 articlesRoute.get(`/:articleId/comments`, readMock, (req, res) => {
   const mocks = req.mocks;
   const articleId = req.params.articleId;
-  const article = mocks.find((item) => {
-    return item.id === articleId;
-  });
+  const article = mocks.find((item) => item.id === articleId);
   const comments = article.comments;
   res.status(HttpCode.OK).json(comments);
 });
@@ -84,9 +76,7 @@ articlesRoute.delete(`/:articleId/comments/:commentId`, readMock, (req, res) => 
   const mocks = req.mocks;
   const articleId = req.params.articleId;
   const commentId = req.params.commentId;
-  const article = mocks.find((item) => {
-    return item.id === articleId;
-  });
+  const article = mocks.find((item) => item.id === articleId);
   const comments = article.comments.filter((c) => {
     return c.id !== commentId;
   });
@@ -98,9 +88,7 @@ articlesRoute.post(`/:articleId/comments`, readMock, (req, res) => {
   const articleId = req.params.articleId;
   const {text} = req.body;
   if (text) {
-    const article = mocks.find((item) => {
-      return item.id === articleId;
-    });
+    const article = mocks.find((item) => item.id === articleId);
     article.comments.push({text});
     res.status(HttpCode.OK).json(article);
   } else {

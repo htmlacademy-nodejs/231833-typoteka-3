@@ -3,7 +3,7 @@
 const fs = require(`fs`).promises;
 const {HttpCode, MOCKS_FILENAME} = require(`../service/constants`);
 
-module.exports.readMock = async (req, res, next) => {
+const fileMocks = async (req, res, next) => {
   try {
     const fileContent = await fs.readFile(MOCKS_FILENAME);
     const stat = await fs.stat(MOCKS_FILENAME);
@@ -22,3 +22,9 @@ module.exports.readMock = async (req, res, next) => {
     }
   }
 };
+
+const withAsync = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
+
+module.exports.readMock = withAsync(fileMocks);

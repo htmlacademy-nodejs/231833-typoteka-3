@@ -9,9 +9,7 @@ const {readMock} = require(`../middleware/readMock`);
 searchRoute.use(`/`, readMock, (req, res) => {
   const mocks = req.mocks;
   const {query} = req.query;
-  const searchResults = mocks.filter((article) => {
-    return article.title === query;
-  });
+  const searchResults = mocks.filter((article) => article.title === query);
   if (searchResults.length >= 1) {
     res.status(HttpCode.OK).json(searchResults);
   } else {
