@@ -5,6 +5,7 @@ const chalk = require(`chalk`);
 const express = require(`express`);
 const app = express();
 const DEFAULT_PORT = 3000;
+const readMock = require(`../cli/readMock`);
 
 const articlesRoute = require(`../../routes/articles`);
 const categoriesRoute = require(`../../routes/categories`);
@@ -20,9 +21,10 @@ app.use(`/search`, searchRoute);
 
 module.exports = {
   name: `--server`,
-  run(args) {
+  async run(args) {
     const [customPort] = args;
     const port = Number.parseInt(customPort, 10) || DEFAULT_PORT;
+    await readMock;
     app.listen(port, (err) => {
       if (err) {
         return console.error(`Ошибка при создании сервера`, err);
