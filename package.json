@@ -7,8 +7,8 @@
     "test": "npm run eslint",
     "test::rest": "jest e2e.test.js",
     "eslint": "eslint --ext .js src/",
-    "start": "LOG_LEVEL=error node ./src/service/service.js --server | ./node_modules/.bin/pino-pretty",
-    "start::debug": "LOG_LEVEL=debug node ./src/service/service.js --server | pino-tee > ./src/service/logs/all-logs",
+    "start": "set LOG_LEVEL=error&&node .\\src\\service\\service.js --server | pino-tee > .\\src\\service\\logs\\all-logs",
+    "start::debug": "set LOG_LEVEL=debug&&node ./src/service/service.js --server | .\\node_modules\\.bin\\pino-pretty",
     "start-front-server": "nodemon ./src/express/index.js"
   },
   "repository": {

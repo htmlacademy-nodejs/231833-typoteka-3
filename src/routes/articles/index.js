@@ -10,8 +10,8 @@ const logger = getLogger();
 
 articlesRoute.get(`/`, async (req, res) => {
   const mocks = await readMock;
-  res.status(HttpCode.OK).json(mocks);
   logger.info(`End request with status code ${res.statusCode}`);
+  res.status(HttpCode.OK).json(mocks);
 });
 
 articlesRoute.get(`/:articleId`, async (req, res) => {
@@ -19,11 +19,11 @@ articlesRoute.get(`/:articleId`, async (req, res) => {
   const articleId = req.params.articleId;
   const article = mocks.find((item) => item.id === articleId);
   if (article !== undefined) {
-    res.status(HttpCode.OK).json(article);
     logger.info(`End request with status code ${res.statusCode}`);
+    res.status(HttpCode.OK).json(article);
   } else {
-    res.status(HttpCode.NOT_FOUND).send(`Article not found`);
     logger.error(`End request with status code ${res.statusCode}`);
+    res.status(HttpCode.NOT_FOUND).send(`Article not found`);
   }
 });
 
@@ -43,11 +43,11 @@ articlesRoute.post(`/`, async (req, res) => {
       img: img || `not set`
     });
     mocks.push(newArticle);
-    res.status(HttpCode.OK).json(mocks);
     logger.info(`End request with status code ${res.statusCode}`);
+    res.status(HttpCode.OK).json(mocks);
   } else {
-    res.status(HttpCode.BAD_REQUEST).send(`Invalid parameters`);
     logger.error(`End request with status code ${res.statusCode}`);
+    res.status(HttpCode.BAD_REQUEST).send(`Invalid parameters`);
   }
 });
 
@@ -69,15 +69,15 @@ articlesRoute.put(`/:articleId`, async (req, res) => {
       if (img) {
         article.img = img;
       }
-      res.status(HttpCode.OK).json(article);
       logger.info(`End request with status code ${res.statusCode}`);
+      res.status(HttpCode.OK).json(article);
     } else {
-      res.status(HttpCode.BAD_REQUEST).send(`Invalid parameters`);
       logger.error(`End request with status code ${res.statusCode}`);
+      res.status(HttpCode.BAD_REQUEST).send(`Invalid parameters`);
     }
   } else {
-    res.status(HttpCode.BAD_REQUEST).send(`Article not found`);
     logger.error(`End request with status code ${res.statusCode}`);
+    res.status(HttpCode.BAD_REQUEST).send(`Article not found`);
   }
 });
 
@@ -87,11 +87,11 @@ articlesRoute.delete(`/:articleId`, async (req, res) => {
   const articleIndex = mocks.findIndex((item) => item.id === articleId);
   if (articleIndex !== -1) {
     mocks.splice(articleIndex, 1);
-    res.status(HttpCode.OK).json(mocks);
     logger.info(`End request with status code ${res.statusCode}`);
+    res.status(HttpCode.OK).json(mocks);
   } else {
-    res.status(HttpCode.NOT_FOUND).json(`Server error!`);
     logger.error(`End request with status code ${res.statusCode}`);
+    res.status(HttpCode.NOT_FOUND).json(`Server error!`);
   }
 });
 
@@ -99,18 +99,18 @@ articlesRoute.get(`/:articleId/comments`, async (req, res) => {
   const mocks = await readMock;
   const articleId = req.params.articleId;
   if (articleId === undefined) {
-    res.status(HttpCode.BAD_REQUEST).json(`Incorrect parameters`);
     logger.error(`End request with status code ${res.statusCode}`);
+    res.status(HttpCode.BAD_REQUEST).json(`Incorrect parameters`);
     return;
   } else {
     const articleIndex = mocks.find((item) => item.id === articleId);
     if (articleIndex !== undefined) {
       const comments = articleIndex.comments;
-      res.status(HttpCode.OK).json(comments);
       logger.info(`End request with status code ${res.statusCode}`);
+      res.status(HttpCode.OK).json(comments);
     } else {
-      res.status(HttpCode.BAD_REQUEST).json(`Incorrect article`);
       logger.error(`End request with status code ${res.statusCode}`);
+      res.status(HttpCode.BAD_REQUEST).json(`Incorrect article`);
     }
   }
 });
@@ -125,20 +125,20 @@ articlesRoute.delete(`/:articleId/comments/:commentId`, async (req, res) => {
       const commentIndex = mocks[articleIndex].comments.findIndex((item) => item.id === commentId);
       if (commentIndex !== -1) {
         mocks[articleIndex].comments.splice(commentIndex, 1);
-        res.status(HttpCode.OK).json(mocks);
         logger.info(`End request with status code ${res.statusCode}`);
+        res.status(HttpCode.OK).json(mocks);
         return;
       } else {
-        res.status(HttpCode.NOT_FOUND).json(`Incorrect ids!`);
         logger.error(`End request with status code ${res.statusCode}`);
+        res.status(HttpCode.NOT_FOUND).json(`Incorrect ids!`);
       }
     } else {
-      res.status(HttpCode.NOT_FOUND).json(`Incorrect ids!`);
       logger.error(`End request with status code ${res.statusCode}`);
+      res.status(HttpCode.NOT_FOUND).json(`Incorrect ids!`);
     }
   } else {
-    res.status(HttpCode.BAD_REQUEST).json(`Incorrect parameters!`);
     logger.error(`End request with status code ${res.statusCode}`);
+    res.status(HttpCode.BAD_REQUEST).json(`Incorrect parameters!`);
   }
 });
 
@@ -155,15 +155,15 @@ articlesRoute.post(`/:articleId/comments`, async (req, res) => {
     const articleIndex = mocks.findIndex((item) => item.id === articleId);
     if (articleIndex !== -1) {
       mocks[articleIndex].comments.push(comment);
-      res.status(HttpCode.OK).json(mocks);
       logger.info(`End request with status code ${res.statusCode}`);
+      res.status(HttpCode.OK).json(mocks);
     } else {
-      res.status(HttpCode.BAD_REQUEST).json(`Incorrect article`);
       logger.error(`End request with status code ${res.statusCode}`);
+      res.status(HttpCode.BAD_REQUEST).json(`Incorrect article`);
     }
   } else {
-    res.status(HttpCode.BAD_REQUEST).send(`Invalid parameters`);
     logger.error(`End request with status code ${res.statusCode}`);
+    res.status(HttpCode.BAD_REQUEST).send(`Invalid parameters`);
   }
 });
 
