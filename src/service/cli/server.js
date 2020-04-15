@@ -1,23 +1,10 @@
 "use strict";
 
-const path = require(`path`);
-const chalk = require(`chalk`);
-const express = require(`express`);
-const app = express();
 const DEFAULT_PORT = 3000;
-const readMock = require(`../cli/readMock`);
-
-const articlesRoute = require(`../../routes/articles`);
-const categoriesRoute = require(`../../routes/categories`);
-const searchRoute = require(`../../routes/search`);
-
-app.set(`views`, path.join(__dirname, `./templates`));
-app.set(`view engine`, `pug`);
-
-app.use(express.json());
-app.use(`/api/articles`, articlesRoute);
-app.use(`/api/categories`, categoriesRoute);
-app.use(`/search`, searchRoute);
+const {readMock} = require(`../cli/readMock`);
+const {getLogger} = require(`../logger`);
+const logger = getLogger();
+const app = require(`./app`);
 
 module.exports = {
   name: `--server`,
@@ -27,9 +14,9 @@ module.exports = {
     await readMock;
     app.listen(port, (err) => {
       if (err) {
-        return console.error(`Ошибка при создании сервера`, err);
+        return logger.error(`Internal server error`, err);
       }
-      return console.info(chalk.green(`Ожидаю соединений на ${port}`));
+      return logger.info(`Server started on port ${port}`);
     });
   }
 };

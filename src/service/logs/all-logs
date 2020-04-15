@@ -1,0 +1,3 @@
+{"level":30,"time":1586875716566,"pid":60244,"hostname":"RUDSBW052825","name":"pino-and-express","msg":"Server started on port 3000"}
+{"level":30,"time":1586878048093,"pid":60244,"hostname":"RUDSBW052825","name":"pino-and-express","msg":"End request with status code 200"}
+{"level":30,"time":1586878742130,"pid":60244,"hostname":"RUDSBW052825","name":"pino-and-express","msg":"End request with status code 200"}
