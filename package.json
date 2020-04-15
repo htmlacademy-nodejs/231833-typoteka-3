@@ -5,8 +5,10 @@
   "main": "./src/service/service.js",
   "scripts": {
     "test": "npm run eslint",
+    "test::rest": "jest e2e.test.js",
     "eslint": "eslint --ext .js src/",
-    "start": "nodemon ./src/service/service.js --server",
+    "start": "set LOG_LEVEL=error&&node .\\src\\service\\service.js --server | pino-tee > .\\src\\service\\logs\\all-logs",
+    "start::debug": "set LOG_LEVEL=debug&&node ./src/service/service.js --server | .\\node_modules\\.bin\\pino-pretty",
     "start-front-server": "nodemon ./src/express/index.js"
   },
   "repository": {
@@ -22,13 +24,19 @@
   "devDependencies": {
     "eslint": "6.8.0",
     "eslint-config-htmlacademy": "0.5.2",
+    "jest": "25.3.0",
     "nodemon": "2.0.2",
-    "pug-lint": "2.6.0"
+    "pino-pretty": "4.0.0",
+    "pug-lint": "2.6.0",
+    "supertest": "4.0.2"
   },
   "dependencies": {
     "chalk": "3.0.0",
     "express": "4.17.1",
+    "express-pino-logger": "4.0.0",
     "nanoid": "3.0.2",
+    "pino": "6.2.0",
+    "pino-tee": "0.3.0",
     "pug": "2.0.4"
   }
 }
