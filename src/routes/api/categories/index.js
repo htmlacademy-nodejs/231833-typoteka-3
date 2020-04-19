@@ -1,10 +1,10 @@
 "use strict";
 
-const {HttpCode} = require(`../../service/constants`);
+const {HttpCode} = require(`../../../service/constants`);
 const {Router} = require(`express`);
 const categoriesRoute = new Router();
-const {readMock} = require(`../../service/cli/readMock`);
-const {getLogger} = require(`../../service/logger`);
+const {readMock} = require(`../../../service/cli/readMock`);
+const {getLogger} = require(`../../../service/logger`);
 const logger = getLogger();
 
 categoriesRoute.get(`/`, async (_req, res) => {

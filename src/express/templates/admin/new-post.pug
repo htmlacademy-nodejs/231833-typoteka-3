@@ -1,10 +1,10 @@
-extends ./shared/layout.pug
+extends ../shared/layout.pug
 block content
   body(style='height: 1050px;')
     .wrapper
       header.header
         a.header__logo.logo(href='#')
-          img.logo__image(src='img/icons/logo-image-only.svg', alt='логотип Тайпотеки')
+          img.logo__image(src='/img/icons/logo-image-only.svg', alt='логотип Тайпотеки')
           span.logo__name Типотека
         button.button.button--colored.header__button-new Новая запись
         .header__dropdown
@@ -89,16 +89,16 @@ block content
                     .new-publication__date-block
                       label(for='new-publication-date', aria-label='Календарь')
                       input#new-publication-date(type='text', name='login', placeholder='21.03.2019')
-                button.new-publication__button.button.button--colored(type='submit') Опубликовать
+                    button.new-publication__button.button.button--colored(form='postarticle', type='submit') Опубликовать
               button.popup__button.button.button--popup-close(type='button', aria-label='Закрыть окно')
                 | Закрыть
                 | окно
               .new-publication__form.form
-                form(action='#', method='get')
+                form(action='http://127.0.0.1:3000/articles/add', method='post', id='postarticle')
                   .form__wrapper.form__wrapper--intro
                     .form__field
                       label
-                        input(type='text', placeholder='Заголовок', required='')
+                        input(type='text', placeholder='Заголовок', required='', name='title' value= data ? data.title : '')
                     .form__field.form__field--post-image
                       label
                         input#image-name-field(type='text', placeholder='Фотография', readonly='')
@@ -110,10 +110,10 @@ block content
                   .form__wrapper.form__wrapper--text
                     .form__field.form__field--publication-text
                       label
-                        textarea(rows='1', placeholder='Анонс публикации')
+                        textarea(rows='1', placeholder='Анонс публикации', name='announce')= data ? data.announce : ''
                     .form__field.form__field--publication-text
                       label
-                        textarea(rows='1', placeholder='Полный текст публикации')
+                        textarea(rows='1', placeholder='Полный текст публикации')= data ? data.fullText : '' 
           .modal__overlay
     script(src='js/vendor.js')
     script(src='js/main.js')
