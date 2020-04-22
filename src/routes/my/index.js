@@ -11,7 +11,7 @@ myRouter.get(`/`, async (req, res) => {
     const data = articles.data;
     res.render(`admin/my`, {data: data || []});
   } catch (e) {
-    res.status(HttpCode.INTERNAL_SERVER_ERROR).render(`Server error`, e.message);
+    res.status(HttpCode.INTERNAL_SERVER_ERROR).render(`errors/500`);
   }
 });
 
@@ -25,7 +25,7 @@ myRouter.get(`/comments`, async (req, res) => {
       res.status(HttpCode.OK).render(`admin/comments`, {data: commentsArray || []});
     });
   } catch (e) {
-    res.status(HttpCode.BAD_REQUEST).send(`Server error`, e.message);
+    res.status(HttpCode.INTERNAL_SERVER_ERROR).render(`errors/500`);
   }
 });
 
