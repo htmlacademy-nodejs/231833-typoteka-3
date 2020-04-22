@@ -29,12 +29,12 @@ articlesRouter.get(`/add`, async (req, res) => {
 articlesRouter.post(`/add`, async (req, res) => {
   const {title, announce, category} = req.body;
   let articles;
-  if (title && announce) {
+  if (title) {
     try {
       articles = await axios.post(`http://127.0.0.1:3000/api/articles`, {
         title,
         category: `category`,
-        announce
+        announce: `announce`
       });
       res.redirect(301, `/my`).render(`admin/my`, {data: articles.data});
       return;

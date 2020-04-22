@@ -111,8 +111,8 @@ block content
                   li.preview__breadcrumbs-item
                     a.preview__breadcrumbs-link(href='#') Удаленная работа
                 .preview__background
-                  img.preview__background-image(src='img/skyscraper@1x.jpg', width='460', height='240', srcset='img/skyscraper@1x.jpg 1x, img/skyscraper@2x.jpg 2x', alt='Фотография небоскреба')
-                time.preview__time(datetime='2019-03-21T20:33') 21.03.2019, 20:33
+                  img.preview__background-image(src='/img/skyscraper@1x.jpg', width='460', height='240', srcset='/img/skyscraper@1x.jpg 1x, img/skyscraper@2x.jpg 2x', alt='Фотография небоскреба')
+                time.preview__time(datetime= article.createdDate)= new Date(article.createdDate).toLocaleDateString('ru-RU').split('-').reverse().join('.')
                 h3.preview__name
                   a.preview__name-link(href='#')= article.title
                 p.preview__text= article.fullText
