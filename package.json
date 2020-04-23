@@ -7,8 +7,8 @@
     "test": "npm run eslint",
     "test::rest": "jest e2e.test.js",
     "eslint": "eslint --ext .js src/",
-    "start": "set LOG_LEVEL=error&&node .\\src\\service\\service.js --server | pino-tee > .\\src\\service\\logs\\all-logs",
-    "start::debug": "set LOG_LEVEL=debug&&node ./src/service/service.js --server | .\\node_modules\\.bin\\pino-pretty",
+    "start": "cross-env LOG_LEVEL=error node ./src/service/service.js --server | pino-tee > ./src/service/logs/all-logs",
+    "start::debug": "cross-env LOG_LEVEL=debug node ./src/service/service.js --server | ./node_modules/.bin/pino-pretty",
     "start-front-server": "nodemon ./src/express/index.js"
   },
   "repository": {
@@ -31,7 +31,9 @@
     "supertest": "4.0.2"
   },
   "dependencies": {
+    "axios": "0.19.2",
     "chalk": "3.0.0",
+    "cross-env": "7.0.2",
     "express": "4.17.1",
     "express-pino-logger": "4.0.0",
     "nanoid": "3.0.2",

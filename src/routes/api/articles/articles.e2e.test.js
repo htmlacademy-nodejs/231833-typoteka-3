@@ -3,7 +3,7 @@
 process.argv.push(`--server`);
 
 const request = require(`supertest`);
-const app = require(`../../service/cli/app`);
+const app = require(`../../../service/cli/app`);
 
 describe(`Articles API GET end-points`, () => {
   test(`When get articles status code should be 200`, async () => {

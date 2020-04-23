@@ -1,24 +1,22 @@
 "use strict";
 
+const {Router} = require(`express`);
+const searchRouter = new Router();
+const axios = require(`axios`);
 const {HttpCode} = require(`../../service/constants`);
 
-const {Router} = require(`express`);
-const searchRoute = new Router();
-const {readMock} = require(`../../service/cli/readMock`);
-const {getLogger} = require(`../../service/logger`);
-const logger = getLogger();
+searchRouter.get(`/`, async (req, res) => {
+  res.status(HttpCode.OK).render(`search`);
+});
 
-searchRoute.use(`/`, async (req, res) => {
-  const mocks = await readMock;
-  const {query} = req.query;
-  const searchResults = mocks.filter((article) => article.title.includes(query));
-  if (searchResults.length >= 1) {
-    logger.info(`End request with status code ${res.statusCode}`);
-    res.status(HttpCode.OK).json(searchResults);
-  } else {
-    logger.info(`End request with status code ${res.statusCode}`);
-    res.status(HttpCode.OK).json([]);
+searchRouter.post(`/`, async (req, res) => {
+  const {search} = req.body;
+  try {
+    const result = await axios.get(`http://127.0.0.1:3000/api/search?query=${encodeURIComponent(search.toLowerCase())}`);
+    res.status(HttpCode.OK).render(`search`, {data: result.data});
+  } catch (e) {
+    res.status(HttpCode.INTERNAL_SERVER_ERROR).render(`errors/500`);
   }
 });
 
-module.exports = searchRoute;
+module.exports = searchRouter;

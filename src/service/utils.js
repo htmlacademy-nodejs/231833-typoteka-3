@@ -1,5 +1,7 @@
 'use strict';
 
+const axios = require(`axios`);
+
 module.exports.getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -13,3 +15,5 @@ module.exports.shuffle = (someArray) => {
   }
   return someArray;
 };
+
+module.exports.getArticles = () => axios.get(`http://127.0.0.1:3000/api/articles`);
