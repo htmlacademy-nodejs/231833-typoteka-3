@@ -1,0 +1,3 @@
+Executing (default): SELECT 1+1 AS result
+{"level":50,"time":1592084760816,"pid":721384,"hostname":"RUDSBW052825","name":"pino-and-express","msg":"Connected to database successfully!"}
+Terminate batch job (Y/N)? Terminate batch job (Y/N)? Terminate batch job (Y/N)? Terminate batch job (Y/N)? 
