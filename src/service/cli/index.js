@@ -18,8 +18,6 @@ const checkDatabase = async () => {
   }
 };
 
-checkDatabase();
-
 const Cli = {
   [generate.name]: generate,
   [help.name]: help,
@@ -28,5 +26,6 @@ const Cli = {
 };
 
 module.exports = {
-  Cli
+  Cli,
+  checkDatabase
 };
